@@ -5,7 +5,7 @@ class PantsController < ApplicationController
 	end
 
 	def search
-		query = params['query']
+		query = params['query'].gsub(' ', '+')
 		url = "http://api.openweathermap.org/data/2.5/weather?q=#{query}"
 		@response = HTTParty.get(url)
 		celsius_low = @response['main']['temp_min'] - 273.15
